@@ -5,7 +5,6 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-let cubeMesh = new THREE.Mesh();
 let stars, starGeo;
 
 lighting();
@@ -37,8 +36,11 @@ function particles() {
 }
 
 function animateParticles() {
+  if (stars.position.y < -25) {
+    stars.position.y = 35;
+  }
   starGeo.verticesNeedUpdate = true;
-  stars.position.y -= 0.9;
+  stars.position.y -= 1.2;
 }
 
 function lighting() {
@@ -55,8 +57,6 @@ function animate() {
 
   animateParticles();
 
-  cubeMesh.rotation.x += 0.008;
-  cubeMesh.rotation.y += 0.008;
   renderer.render(scene, camera);
 }
 
